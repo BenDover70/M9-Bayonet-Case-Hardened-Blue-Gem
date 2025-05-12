@@ -1,0 +1,17 @@
+/* CSS-Stylesheet */
+
+/* Alles Vorgaben des Browsers zurücksetzen */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 20px;
+    font-family: Arial, sans-serif;
+}
+
+h1. {
+    color: red;
+}
