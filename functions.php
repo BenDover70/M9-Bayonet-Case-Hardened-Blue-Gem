@@ -152,4 +152,51 @@ function get_username($user_id) {
     return $user['username'] ?? null; // Falls kein Benutzer gefunden wurde, null zurückgeben
 }
 
+function get_email($user_id) {
+    $conn = connect();
+    
+    $query = "SELECT email FROM users WHERE id = ?";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "i", $user_id);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $email = mysqli_fetch_assoc($result);
+    
+    mysqli_stmt_close($stmt);
+    mysqli_close($conn);
+    
+    return $user['email'] ?? null; // Falls kein Benutzer gefunden wurde, null zurückgeben
+}
+
+function get_dob($user_id) {
+    $conn = connect();
+    
+    $query = "SELECT dob FROM users WHERE id = ?";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "i", $user_id);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $dob = mysqli_fetch_assoc($result);
+    
+    mysqli_stmt_close($stmt);
+    mysqli_close($conn);
+    
+    return $user['dob'] ?? null; // Falls kein Benutzer gefunden wurde, null zurückgeben
+}
+
+function get_password($user_id) {
+    $conn = connect();
+    
+    $query = "SELECT password FROM users WHERE id = ?";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "i", $user_id);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $user = mysqli_fetch_assoc($result);
+    
+    mysqli_stmt_close($stmt);
+    mysqli_close($conn);
+    
+    return $user['password'] ?? null; // Falls kein Benutzer gefunden wurde, null zurückgeben
+}
 ?>
