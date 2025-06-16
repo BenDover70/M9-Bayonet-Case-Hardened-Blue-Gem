@@ -152,4 +152,120 @@ function get_username($user_id) {
     return $user['username'] ?? null; // Falls kein Benutzer gefunden wurde, null zurückgeben
 }
 
+function get_email($user_id) {
+    $conn = connect();
+    
+    $query = "SELECT email FROM users WHERE id = ?";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "i", $user_id);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $email = mysqli_fetch_assoc($result);
+    
+    mysqli_stmt_close($stmt);
+    mysqli_close($conn);
+    
+    return $email['email'] ?? null; // Falls kein Benutzer gefunden wurde, null zurückgeben
+}
+
+function get_dob($user_id) {
+    $conn = connect();
+    
+    $query = "SELECT dob FROM users WHERE id = ?";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "i", $user_id);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $dob = mysqli_fetch_assoc($result);
+    
+    mysqli_stmt_close($stmt);
+    mysqli_close($conn);
+    
+    return $dob['dob'] ?? null; // Falls kein Benutzer gefunden wurde, null zurückgeben
+}
+
+function get_password($user_id) {
+    $conn = connect();
+    
+    $query = "SELECT password FROM users WHERE id = ?";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "i", $user_id);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $user = mysqli_fetch_assoc($result);
+    
+    mysqli_stmt_close($stmt);
+    mysqli_close($conn);
+    
+    return $password['password'] ?? null; // Falls kein Benutzer gefunden wurde, null zurückgeben
+}
+
+
+
+
+
+
+// userdaten ändern
+function update_user_data($user_id, $new_username, $new_email, $new_dob) {  
+    $conn = connect();  
+      
+    // benutzername existiert check 
+    $stmt = mysqli_prepare($conn, "SELECT id FROM users WHERE username = ? AND id != ?");  
+    mysqli_stmt_bind_param($stmt, "si", $new_username, $user_id);  
+    mysqli_stmt_execute($stmt);  
+    mysqli_stmt_store_result($stmt);  
+      
+    if (mysqli_stmt_num_rows($stmt) > 0) {  
+        mysqli_close($conn);  
+        return "Benutzername bereits vergeben!";  
+    }  
+    mysqli_stmt_close($stmt);  
+      
+    // email existiert check 
+    $stmt = mysqli_prepare($conn, "SELECT id FROM users WHERE email = ? AND id != ?");  
+    mysqli_stmt_bind_param($stmt, "si", $new_email, $user_id);  
+    mysqli_stmt_execute($stmt);  
+    mysqli_stmt_store_result($stmt);  
+      
+    if (mysqli_stmt_num_rows($stmt) > 0) {  
+        mysqli_close($conn);  
+        return "E-Mail bereits vergeben!";  
+    }  
+    mysqli_stmt_close($stmt);  
+      
+    // daten ändern  
+    $stmt = mysqli_prepare($conn, "UPDATE users SET username = ?, email = ?, dob = ? WHERE id = ?");  
+    mysqli_stmt_bind_param($stmt, "sssi", $new_username, $new_email, $new_dob, $user_id);  
+    $result = mysqli_stmt_execute($stmt);  
+    mysqli_close($conn);  
+      
+    return $result ? true : "Fehler beim Aktualisieren!";  
+}  
+  
+// passwort ändern 
+function update_password($user_id, $current_password, $new_password) {  
+    $conn = connect();  
+      
+    // password check 
+    $stmt = mysqli_prepare($conn, "SELECT password FROM users WHERE id = ?");  
+    mysqli_stmt_bind_param($stmt, "i", $user_id);  
+    mysqli_stmt_execute($stmt);  
+    $result = mysqli_stmt_get_result($stmt);  
+    $user = mysqli_fetch_assoc($result);  
+      
+    if (!password_verify($current_password, $user['password'])) {  
+        mysqli_close($conn);  
+        return "Falsches Passwort!";  
+    }  
+      
+    // neues passwort speichern  
+    $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);  
+    $stmt = mysqli_prepare($conn, "UPDATE users SET password = ? WHERE id = ?");  
+    mysqli_stmt_bind_param($stmt, "si", $hashed_password, $user_id);  
+    $result = mysqli_stmt_execute($stmt);  
+    mysqli_close($conn);  
+      
+    return $result ? true : "Fehler beim Ändern des Passworts!";  
+}
 ?>
+
