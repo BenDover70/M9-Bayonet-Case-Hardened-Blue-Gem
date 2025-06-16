@@ -7,6 +7,7 @@
  */
 require_once 'functions.php';
 require_once 'head.php';
+require_once 'navbar.php';
 
 if  (!isset($_SESSION['user_id'])) {
     header("Location: index.php?page=login&error=not_logged_in");
