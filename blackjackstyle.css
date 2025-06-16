@@ -1,0 +1,86 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-image: url('./pictures/background.jpg'); /* Set your image path here */
+    background-size: cover; /* Ensure the image covers the entire background */
+    background-position: center; /* Center the image */
+    color: white;
+}
+
+.game-container {
+    max-width: 1200px; /* Smaller width */
+    margin: auto;
+    padding: 40px; /* Reduced padding */
+    border: 2px solid white;
+    border-radius: 15px;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent dark background for readability */
+}
+
+.hand-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 0px; /* Reduced margin */
+}
+
+.hand {
+    display: flex;
+    gap: 10px; /* Slightly reduced gap between cards */
+}
+
+.card img {
+    width: 140px; /* Larger card width */
+    height: 200px; /* Larger card height */
+    border-radius: 5px;
+}
+
+.hidden-card img {
+    background: gray;
+}
+
+.buttons {
+    margin-top: 0px; /* Increased margin */
+}
+
+.bet-container {
+    margin-bottom: 20px; /* Increased margin */
+}
+
+button {
+    margin: 15px;
+    padding: 15px 30px; /* Increased padding for a more prominent look */
+    font-size: 22px; /* Increased font size */
+    border: none; /* Remove the default border */
+    border-radius: 30px; /* Rounded corners */
+    background: linear-gradient(145deg, #6e7f5a, #4b5c35); /* Gradient background */
+    color: white; /* White text */
+    cursor: pointer; /* Pointer cursor on hover */
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow effect */
+    transition: all 0.3s ease; /* Smooth transition for hover effects */
+}
+
+button:hover {
+    background: linear-gradient(145deg, #4b5c35, #6e7f5a); /* Reverse gradient on hover */
+    transform: translateY(-4px); /* Lift the button slightly on hover */
+    box-shadow: 4px 8px 16px rgba(0, 0, 0, 0.3); /* Enhance shadow on hover */
+}
+
+button:active {
+    transform: translateY(2px); /* Slightly push the button down on click */
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Reduce shadow on click */
+}
+
+.stats {
+    display: flex;
+    justify-content: center;
+    margin-top: 0px;
+}
+
+.stat {
+    margin: 0 20px;
+    color: white;
+}
+
+.stat h3 {
+    font-size: 20px;
+}
+

@@ -20,12 +20,14 @@ $allowedPages = [
     'register',
     'verify',
     'logout'
+    
 ]; 
 
 // Alle Seiten, die nur für angemeldete Benutzer verfügbar sein sollen, werden hier in das Array eingetragen.
 $protectedPages = [
     'home',
-    'profile'
+    'profile',
+    'blackjack'
 ]; 
 
 // Alle Seiten, die für Administratoren deiner Seite verfügbar sein sollen, aber nicht für andere angemeldete Benutzer, werden hier in das Array eingeragen.
