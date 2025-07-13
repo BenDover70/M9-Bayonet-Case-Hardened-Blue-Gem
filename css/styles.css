@@ -1,6 +1,6 @@
 /* CSS-Stylesheet */
 
-/* Alles Vorgaben des Browsers zurücksetzen */
+/* Reset */
 * {
     margin: 0;
     padding: 0;
@@ -12,6 +12,558 @@ body {
     font-family: Arial, sans-serif;
 }
 
-h1. {
+/* Hintergrund-Headerbild */
+.hero {
+    background-image: url('../pictures/casino-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.7);
+}
+
+.price {
+    color: #d00a2ce6;
+}
+
+.shop-image {
+    height: 180px;
+    object-fit: contain;
+}
+
+/* Dark Theme */
+body[data-bs-theme="dark"] {
+    background-color: #242424;
+    color: #fff;
+}
+
+/* Nur für andere Seiten: dunkler Hintergrund */
+body:not(.slots-page)[data-bs-theme="dark"] {
+    background-color: #242424;
+    color: #fff;
+}
+
+/* Slotmaschine Styles*/
+
+/* Slotbereich */
+.slots-page .slot-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 80px;
+    position: relative;
+}
+
+/* Slotcontainer */
+.slots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    background: #eee;
+    padding: 20px;
+    border: 2px solid #888;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+/* Reels */
+.reel {
+    width: 79px;
+    height: 237px;
+    border: 1px solid #444;
+    border-radius: 5px;
+    background-image: url('https://assets.codepen.io/439000/slotreel.webp');
+    background-repeat: repeat-y;
+    background-position: 0 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.reel::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(0,0,0,0.4), transparent 30%, transparent 70%, rgba(0,0,0,0.4));
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+}
+
+/* Buttons & Checkbox */
+.slot-controls {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+#spinButton {
+    background-color: #00cc99;
+    color: #fff;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#spinButton:hover {
+    background-color: #009977;
+}
+
+.autospin-toggle {
+    color: #f0f0f0;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/*Chip anzeige auf slot.php*/
+
+#chip-display {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    background-color: #222;
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 12px;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    z-index: 1000;
+}
+
+/* Styles für plinko.php */
+
+:root {
+  --bin-yellow: #FFD54F;
+  --bin-light-orange: #FFB74D;
+  --bin-orange: #FF9800;
+  --bin-dark-orange: #F57C00;
+  --bin-red: #E53935;
+  --bin-deep-red: #B71C1C;
+  --bin-darkest-red: #7F0000;
+}
+
+body {
+  background-color: #1e1e1e;
+  color: #fff;
+}
+
+#message.info {
+  color: #ffb74d;
+}
+#message.error {
+  color: #e53935;
+}
+#message.success {
+  color: #81c784;
+}
+
+/* Mines Styles */
+
+body {
+    background-color: #1e1e1e;
+    color: #fff;
+}
+
+/* Spielfeld Container */
+#mines-container {
+    display: grid;
+    grid-template-columns: repeat(5, 60px);
+    grid-template-rows: repeat(5, 60px);
+    gap: 10px;
+    justify-content: center;
+    margin: 30px auto 20px;
+}
+
+/* Boxen (Kacheln) */
+.box {
+    width: 60px;
+    height: 60px;
+    background-color: #fff;
+    border: 2px solid #999;
+    border-radius: 6px;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: transparent;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Aufgedeckt: Diamant */
+.box.safe {
+    background-color: transparent;
+    color: #00bcd4;
+}
+
+/* Aufgedeckt: Mine */
+.box.mine {
+    background-color: transparent;
     color: red;
+}
+
+/* Buttons */
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* Message Style */
+#game-message {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+#chips-general {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    background-color: #222;
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 12px;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    z-index: 1000;
+}
+
+/* ========================================
+   BLACKJACK-SPIEL STYLES
+   ======================================== */
+
+.blackjack-page {    
+    background-image: url('../pictures/background.jpg');    
+    background-size: cover;    
+    background-position: center;    
+    background-repeat: no-repeat;    
+    background-attachment: fixed;    
+    color: #fff;    
+    min-height: 100vh;        
+    padding-bottom: 20px;    
+}  
+  
+  
+.blackjack-page .game-container {  
+    max-width: 1500px;  
+    margin: auto;  
+    padding: 40px;  
+    border: 2px solid rgba(255, 255, 255, 0.3);  
+    border-radius: 15px;  
+    background: rgba(0, 0, 0, 0.8);  
+    box-shadow: 0 0 30px rgba(0,0,0,0.7);  
+    text-align: center;  
+    backdrop-filter: blur(5px);  
+}  
+  
+.blackjack-page h1 {  
+    color: #fff;  
+    margin-bottom: 20px;  
+    text-shadow: 0 2px 10px rgba(0,0,0,0.9);  
+    font-size: 2.5em;  
+}  
+  
+.blackjack-page #message {  
+    color: #ffb74d;  
+    font-size: 1.2em;  
+    margin-bottom: 20px;  
+    min-height: 30px;  
+    text-shadow: 0 1px 3px rgba(0,0,0,0.8);  
+}  
+  
+.blackjack-page .hand-container {  
+    display: flex;  
+    justify-content: space-around;  
+    margin: 30px 0;  
+    gap: 40px;  
+}  
+  
+.blackjack-page .hand-container > div {  
+    flex: 1;  
+    max-width: 800px;  
+}  
+  
+.blackjack-page .hand-container h2 {  
+    color: #fff;  
+    margin-bottom: 15px;  
+    text-shadow: 0 2px 5px rgba(0,0,0,0.8);  
+}  
+  
+.blackjack-page .hand {  
+    display: flex;  
+    gap: 10px;  
+    justify-content: center;  
+    flex-wrap: wrap;  
+    min-height: 200px;  
+    align-items: center;  
+}  
+  
+.blackjack-page .card img {  
+    width: 120px;  
+    height: 170px;  
+    border-radius: 8px;  
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);  
+    transition: transform 0.2s ease;  
+}  
+  
+.blackjack-page .card img:hover {  
+    transform: translateY(-5px);  
+}  
+  
+.blackjack-page .hidden-card img {  
+    background: #666;  
+}  
+  
+/* Bet Container */  
+.blackjack-page .bet-container {  
+    margin: 30px 0;  
+    padding: 25px;  
+    background: rgba(0,0,0,0.6);  
+    border-radius: 15px;  
+    border: 1px solid rgba(255, 255, 255, 0.2);  
+    backdrop-filter: blur(10px);  
+}  
+  
+.blackjack-page .bet-container h3 {  
+    color: #fff;  
+    margin-bottom: 20px;  
+    text-shadow: 0 2px 5px rgba(0,0,0,0.8);  
+}  
+  
+/* Bet Container Layout - Chips und Buttons nebeneinander */  
+.blackjack-page .bet-controls {  
+    display: flex;  
+    align-items: center;  
+    justify-content: center;  
+    gap: 40px;  
+    flex-wrap: wrap;  
+}  
+  
+.blackjack-page .chips-section {  
+    display: flex;  
+    flex-direction: column;  
+    align-items: center;  
+}  
+  
+.blackjack-page #chip-buttons {  
+    display: flex;  
+    gap: 20px;  
+    justify-content: center;  
+    margin-bottom: 15px;  
+    flex-wrap: wrap;  
+}  
+  
+.blackjack-page .chip-button-wrapper {  
+    display: flex;  
+    flex-direction: column;  
+    align-items: center;  
+}  
+  
+.blackjack-page .chip-btn {  
+    background: none;  
+    border: none;  
+    cursor: pointer;  
+    padding: 0;  
+    transition: transform 0.2s, box-shadow 0.2s;  
+    border-radius: 50%;  
+}  
+  
+.blackjack-page .chip-btn img {  
+    width: 60px;  
+    height: 60px;  
+    border-radius: 50%;  
+    box-shadow: 0 4px 12px rgba(0,0,0,0.6);  
+    transition: all 0.2s ease;  
+}  
+  
+.blackjack-page .chip-btn:hover,  
+.blackjack-page .chip-btn.selected {  
+    outline: 3px solid #00cc99;  
+    box-shadow: 0 0 20px rgba(0, 204, 153, 0.7);  
+    transform: scale(1.1);  
+}  
+  
+.blackjack-page .chip-value {  
+    color: #fff;  
+    margin-top: 8px;  
+    font-size: 0.9em;  
+    font-weight: bold;  
+    text-shadow: 0 1px 3px rgba(0,0,0,0.8);  
+}  
+  
+.blackjack-page .bet-info {  
+    color: #ffb74d;  
+    font-size: 1.2em;  
+    margin: 15px 0;  
+    text-shadow: 0 1px 3px rgba(0,0,0,0.8);  
+    font-weight: bold;  
+}  
+  
+/* Game Buttons - neben den Chips */  
+.blackjack-page .game-buttons {  
+    display: flex;  
+    flex-direction: column;  
+    gap: 15px;  
+    align-items: center;  
+}  
+  
+.blackjack-page .game-buttons button {  
+    background-color: #00cc99;  
+    color: #fff;  
+    border: none;  
+    padding: 15px 30px;  
+    border-radius: 10px;  
+    font-size: 1.2em;  
+    font-weight: bold;  
+    cursor: pointer;  
+    transition: all 0.2s ease;  
+    box-shadow: 0 6px 15px rgba(0,0,0,0.4);  
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);  
+    min-width: 150px;  
+}  
+  
+.blackjack-page .game-buttons button:hover {  
+    background-color: #009977;  
+    transform: translateY(-3px);  
+    box-shadow: 0 8px 20px rgba(0,0,0,0.5);  
+}  
+  
+.blackjack-page .game-buttons button:active {  
+    transform: translateY(-1px);  
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4);  
+}  
+  
+.blackjack-page .game-buttons button:disabled {  
+    background-color: #666;  
+    cursor: not-allowed;  
+    transform: none;  
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);  
+}  
+  
+/* Alte buttons Klasse entfernt, da sie jetzt in game-buttons integriert ist */  
+  
+/* Score Display */  
+.blackjack-page .hand-container p {  
+    color: #ffb74d;  
+    font-size: 1.1em;  
+    font-weight: bold;  
+    margin-top: 10px;  
+    text-shadow: 0 1px 3px rgba(0,0,0,0.8);  
+}  
+  
+/* Responsive Design */  
+@media (max-width: 768px) {  
+    .blackjack-page .hand-container {  
+        flex-direction: column;  
+        gap: 20px;  
+    }  
+      
+    .blackjack-page .bet-controls {  
+        flex-direction: column;  
+        gap: 20px;  
+    }  
+      
+    .blackjack-page #chip-buttons {  
+        gap: 15px;  
+    }  
+      
+    .blackjack-page .chip-btn img {  
+        width: 50px;  
+        height: 50px;  
+    }  
+      
+    .blackjack-page .game-buttons button {  
+        padding: 12px 24px;  
+        font-size: 1em;  
+        min-width: 120px;  
+    }  
+      
+    .blackjack-page .game-container {  
+        padding: 20px;  
+        margin: 10px;  
+    }  
+      
+    .blackjack-page #chip-display {  
+        position: relative;  
+        top: auto;  
+        right: auto;  
+        margin-bottom: 20px;  
+        display: inline-block;  
+    }  
+}
+
+.blackjack-page .bet-controls {  
+    display: flex;  
+    align-items: center;  
+    justify-content: center;  
+    gap: 40px;  
+    flex-wrap: wrap;  
+}  
+  
+.blackjack-page .bet-options {  
+    display: flex;  
+    flex-direction: column;  
+    gap: 15px;  
+    align-items: center;  
+}  
+  
+.blackjack-page .bet-option-btn {  
+    background-color: #00cc99;  
+    color: #fff;  
+    border: none;  
+    padding: 15px 30px;  
+    border-radius: 10px;  
+    font-size: 1.2em;  
+    font-weight: bold;  
+    cursor: pointer;  
+    transition: all 0.2s ease;  
+    box-shadow: 0 6px 15px rgba(0,0,0,0.4);  
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);  
+    min-width: 150px;  
+    margin-bottom: 0;  
+}  
+  
+.blackjack-page .bet-option-btn:hover {  
+    background-color: #009977;  
+    transform: translateY(-3px);  
+    box-shadow: 0 8px 20px rgba(0,0,0,0.5);  
+}  
+  
+.blackjack-page .bet-option-btn:active {  
+    transform: translateY(-1px);  
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4);  
+}  
+  
+.blackjack-page .bet-option-btn:disabled {  
+    background-color: #666;  
+    cursor: not-allowed;  
+    transform: none;  
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);  
+}  
+  
+/* Responsive Anpassung */  
+@media (max-width: 900px) {  
+    .blackjack-page .bet-controls {  
+        flex-direction: column;  
+        gap: 20px;  
+    }  
+    .blackjack-page .bet-options {  
+        flex-direction: row;  
+        gap: 10px;  
+        margin-bottom: 10px;  
+    }  
 }
