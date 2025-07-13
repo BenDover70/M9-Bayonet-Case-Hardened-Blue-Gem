@@ -15,4 +15,10 @@ ini_set('session.gc_maxlifetime', 3600); // Session läuft nach 1 Stunde ab
 session_set_cookie_params(3600); // Cookie läuft ebenfalls nach 1 Stunde ab
 session_start();
 
+// DB Verbindung aufbauen
+$conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+if ($conn->connect_error) {
+    die("Verbindung fehlgeschlagen: " . $conn->connect_error);
+}
 ?>
+

@@ -58,8 +58,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['register'])) {
 
 <?php require_once 'head.php'; ?>
 
-<h2>Login / Registrierung</h2>
-
 <?php 
 // Fehler- oder Erfolgsmeldungen anzeigen
 if (!empty($message)) {
@@ -72,36 +70,120 @@ if (isset($_SESSION['message'])) {
 }
 ?>
 
-<!-- Loginformular -->
-<form method="post">
-    <h3>Einloggen</h3>
-    <label>Benutzername:</label>
-    <input type="text" name="username" required><br />
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <label>Passwort:</label>
-    <input type="password" name="password" required><br />
+  <style>
+    body {
+      background-size: cover;
+      background-position: center;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-    <button type="submit" name="login">Einloggen</button>
-</form>
+    .form-wrapper {
+      background-color: rgba(36, 36, 36, 0.9);
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+      max-width: 1000px;
+      width: 90%;
+    }
 
-<hr />
+    .form-box {
+      height: 100%;
+    }
 
-<!-- Registrierungsformular -->
-<form method="post">
-    <h3>Registrieren</h3>
-    <label>Benutzername:</label>
-    <input type="text" name="new_username" required><br />
+    h2 {
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
 
-    <label>E-Mail:</label>
-    <input type="email" name="email" required><br />
+    input {
+      margin-bottom: 15px;
+    }
 
-    <label>Passwort:</label>
-    <input type="password" name="new_password" required><br />
+    .btn {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
 
-    <label>Passwort bestätigen:</label>
-    <input type="password" name="confirm_password" required><br /> 
+</br>
 
-    <button type="submit" name="register">Registrieren</button>
-</form>
+<div class="position-fixed top-0 start-0 w-100 h-100" style="
+            background-image: url('pictures/login-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.85;
+            z-index: -1;">
+</div>
 
-<?php require_once 'footer.php'; ?>
+<div class="form-wrapper">
+  <div class="row g-4">
+    <!-- Login -->
+    <div class="col-md-6 d-flex align-items-stretch">
+      <div class="form-box p-4 bg-body-secondary w-100 rounded shadow-sm">
+        <form method="post">
+          <h2 class="mb-3">Einloggen</h2>
+
+          <div class="mb-3">
+            <label for="username" class="form-label">Benutzername:</label>
+            <input type="text" id="username" name="username" class="form-control" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="password" class="form-label">Passwort:</label>
+            <input type="password" id="password" name="password" class="form-control" required>
+          </div>
+
+          <button type="submit" name="login" class="btn btn-success">Einloggen</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Registrierung -->
+    <div class="col-md-6 d-flex align-items-stretch">
+      <div class="form-box p-4 bg-body-secondary w-100 rounded shadow-sm">
+        <form method="post">
+          <h2 class="mb-3">Registrieren</h2>
+
+          <div class="mb-3">
+            <label for="new_username" class="form-label">Benutzername:</label>
+            <input type="text" id="new_username" name="new_username" class="form-control" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="email" class="form-label">E-Mail:</label>
+            <input type="email" id="email" name="email" class="form-control" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="new_password" class="form-label">Passwort:</label>
+            <input type="password" id="new_password" name="new_password" class="form-control" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="confirm_password" class="form-label">Passwort bestätigen:</label>
+            <input type="password" id="confirm_password" name="confirm_password" class="form-control" required>
+          </div>
+
+          <button type="submit" name="register" class="btn btn-primary">Registrieren</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+
+<?php 
+require_once 'footer.php'; 
+?>

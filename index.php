@@ -15,4 +15,6 @@ if (isset($_SESSION['user_id'])) {
 
 
 require_once 'router.php'; // Der Router verwaltet die Seiten
+
+ 
 ?>

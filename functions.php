@@ -30,7 +30,7 @@ function connect() {
  *          Absenderadresse no-reply@fes-informatik.de verwenden. 
  */
 function send_verification_email($email, $verification_code) {
-    $verification_link = "http://fes-informatik.de/dob/ben/projekt/index.php?page=verify&code=" . $verification_code;
+    $verification_link = "http://fes-informatik.de/dob/g03/project/index.php?page=verify&code=" . $verification_code;
     $subject = "Bitte bestätige deine Registrierung";
     $message = "Hallo,\n\nBitte bestätige deine Registrierung, indem du auf folgenden Link klickst:\n\n$verification_link\n\nDanke!";
     $headers = "Content-Type: text/plain; charset=UTF-8" . "\r\n";
@@ -267,5 +267,124 @@ function update_password($user_id, $current_password, $new_password) {
       
     return $result ? true : "Fehler beim Ändern des Passworts!";  
 }
-?>
 
+
+
+
+function get_blackjack_stats($user_id) {  
+    $conn = connect();  
+      
+    $query = "SELECT wins, losses, ties FROM blackjack_stats WHERE user_id = ?";  
+    $stmt = mysqli_prepare($conn, $query);  
+    mysqli_stmt_bind_param($stmt, "i", $user_id);  
+    mysqli_stmt_execute($stmt);  
+    $result = mysqli_stmt_get_result($stmt);  
+    $stats = mysqli_fetch_assoc($result);  
+      
+    mysqli_stmt_close($stmt);  
+    mysqli_close($conn);  
+      
+    // Falls noch keine Statistiken vorhanden sind, Standardwerte zurückgeben  
+    if (!$stats) {  
+        return ['wins' => 0, 'losses' => 0, 'ties' => 0];  
+    }  
+      
+    return $stats;  
+}
+
+
+function update_blackjack_stats($user_id, $result) {   
+    error_log("update_blackjack_stats aufgerufen mit user_id=$user_id und result=$result");   
+    $conn = connect();    
+      
+    // Prüfen, ob bereits Statistiken für diesen Benutzer existieren    
+    $check_query = "SELECT user_id FROM blackjack_stats WHERE user_id = ?";    
+    $check_stmt = mysqli_prepare($conn, $check_query);    
+    mysqli_stmt_bind_param($check_stmt, "i", $user_id);    
+    mysqli_stmt_execute($check_stmt);    
+    mysqli_stmt_store_result($check_stmt);    
+      
+    if (mysqli_stmt_num_rows($check_stmt) == 0) {    
+        // Neue Statistiken erstellen    
+        mysqli_stmt_close($check_stmt);    
+        $insert_query = "INSERT INTO blackjack_stats (user_id, wins, losses, ties) VALUES (?, 0, 0, 0)";    
+        $insert_stmt = mysqli_prepare($conn, $insert_query);    
+        mysqli_stmt_bind_param($insert_stmt, "i", $user_id);    
+        if (!mysqli_stmt_execute($insert_stmt)) {    
+            error_log("Fehler beim Einfügen: " . mysqli_stmt_error($insert_stmt));    
+        }  
+        mysqli_stmt_close($insert_stmt);    
+    } else {    
+        mysqli_stmt_close($check_stmt);    
+    }    
+      
+    // Statistiken aktualisieren    
+    $field = '';    
+    switch ($result) {    
+        case 'win':    
+            $field = 'wins';    
+            break;    
+        case 'loss':    
+            $field = 'losses';    
+            break;    
+        case 'tie':    
+            $field = 'ties';    
+            break;    
+        default:    
+            mysqli_close($conn);    
+            return false;    
+    }    
+      
+    $update_query = "UPDATE blackjack_stats SET $field = $field + 1 WHERE user_id = ?";    
+    $update_stmt = mysqli_prepare($conn, $update_query);    
+    mysqli_stmt_bind_param($update_stmt, "i", $user_id);    
+    $success = mysqli_stmt_execute($update_stmt);    
+      
+    if (!$success) {  
+        error_log("Fehler beim Update: " . mysqli_stmt_error($update_stmt));  
+    }  
+      
+    mysqli_stmt_close($update_stmt);    
+    mysqli_close($conn);    
+      
+    return $success;    
+}
+
+function initialize_user_chips($user_id) {
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'user_chips';
+
+    $exists = $wpdb->get_var( $wpdb->prepare(
+        "SELECT COUNT(*) FROM $table_name WHERE user_id = %d", $user_id
+    ));
+
+    if ( !$exists ) {
+        $wpdb->insert($table_name, [
+            'user_id' => $user_id,
+            'chips' => 4000
+        ]);
+    }
+}
+
+
+function get_user_chips($user_id) {  
+    $conn = connect();  
+    $stmt = mysqli_prepare($conn, "SELECT chips FROM user_chips WHERE user_id = ?");  
+    mysqli_stmt_bind_param($stmt, "i", $user_id);  
+    mysqli_stmt_execute($stmt);  
+    $result = mysqli_stmt_get_result($stmt);  
+    $row = mysqli_fetch_assoc($result);  
+    mysqli_stmt_close($stmt);  
+    mysqli_close($conn);  
+    return $row ? (int)$row['chips'] : 0;  
+}  
+  
+function update_user_chips($user_id, $new_amount) {  
+    $conn = connect();  
+    $stmt = mysqli_prepare($conn, "UPDATE user_chips SET chips = ? WHERE user_id = ?");  
+    mysqli_stmt_bind_param($stmt, "ii", $new_amount, $user_id);  
+    $success = mysqli_stmt_execute($stmt);  
+    mysqli_stmt_close($stmt);  
+    mysqli_close($conn);  
+    return $success;  
+}
