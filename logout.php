@@ -7,6 +7,6 @@
 
 session_start();
 session_destroy();
-header("Location: index.php?page=login"); // Weiterleitung nach Logout
+header("Location: start.php"); // Weiterleitung nach Logout
 exit;
 ?>

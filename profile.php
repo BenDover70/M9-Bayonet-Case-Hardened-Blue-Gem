@@ -63,55 +63,71 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 ?>
 
+</br>
 
+<div class="row justify-content-center text-center">
+    <h1>Mein Profil</h1>  
+    <?php echo $message; ?>  
+</div>
+<!--  daten anzeigen -->
+</br>
 
-<h2>Mein Profil</h2>  
-<?php echo $message; ?>  
-  
-<!--  daten anzeigen -->  
-<div>  
-    <h3>Meine Daten</h3>  
-    <p>Benutzername: <?php echo htmlspecialchars($username); ?></p>  
-    <p>E-Mail: <?php echo htmlspecialchars($email); ?></p>  
-    <p>Geburtsdatum: <?php echo htmlspecialchars($dob ?: 'Nicht angegeben'); ?></p>  
-</div>  
-  
-<!-- profil bearbeiten -->  
-<div>  
-    <h3>Profil bearbeiten</h3>  
-    <form method="post">  
-        <p>  
-            <label for="username">Benutzername:</label>  
-            <input type="text" id="username" name="username" value="<?php echo htmlspecialchars($username); ?>" required>  
-        </p>  
-        <p>  
-            <label for="email">E-Mail:</label>  
-            <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($email); ?>" required>  
-        </p>  
-        <p>  
-            <label for="dob">Geburtsdatum:</label>  
-            <input type="date" id="dob" name="dob" value="<?php echo htmlspecialchars($dob); ?>">  
-        </p>  
-        <button type="submit" name="update_profile">Speichern</button>  
-    </form>  
-      
-<!-- neues passwort -->  
-    <h3>Passwort ändern</h3>  
-    <form method="post">  
-        <p>  
-            <label for="current_password">Aktuelles Passwort:</label>  
-            <input type="password" id="current_password" name="current_password" required>  
-        </p>  
-        <p>  
-            <label for="new_password">Neues Passwort:</label>  
-            <input type="password" id="new_password" name="new_password" required>  
-        </p>  
-        <p>  
-            <label for="confirm_password">Passwort bestätigen:</label>  
-            <input type="password" id="confirm_password" name="confirm_password" required>  
-        </p>  
-        <button type="submit" name="update_password">Passwort ändern</button>  
-    </form>  
+<div class="container mt-5">
+    <div class="row justify-content-center text-center">
+    <!-- Meine Daten -->
+    <div class="col-md-4 mb-4">
+      <div class="p-3 border rounded bg-body text-body h-100">
+        <h3>Meine Daten</h3>
+        <p>Benutzername: <?php echo htmlspecialchars($username); ?></p>
+        <p>E-Mail: <?php echo htmlspecialchars($email); ?></p>
+        <p>Geburtsdatum: <?php echo htmlspecialchars($dob ?: 'Nicht angegeben'); ?></p>
+      </div>
+    </div>
+
+    <!-- Profil bearbeiten -->
+    <div class="col-md-4 mb-4">
+      <div class="p-3 border rounded bg-body text-body h-100">
+        <h3>Profil bearbeiten</h3>
+        <form method="post">
+          <p>
+            <label for="username">Benutzername:</label>
+            <input type="text" id="username" name="username" class="form-control" value="<?php echo htmlspecialchars($username); ?>" required>
+          </p>
+          <p>
+            <label for="email">E-Mail:</label>
+            <input type="email" id="email" name="email" class="form-control" value="<?php echo htmlspecialchars($email); ?>" required>
+          </p>
+          <p>
+            <label for="dob">Geburtsdatum:</label>
+            <input type="date" id="dob" name="dob" class="form-control" value="<?php echo htmlspecialchars($dob); ?>">
+          </p>
+          <button type="submit" name="update_profile" class="btn btn-secondary">Speichern</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Passwort ändern -->
+    <div class="col-md-4 mb-4">
+      <div class="p-3 border rounded bg-body text-body h-100">
+        <h3>Passwort ändern</h3>
+        <form method="post">
+          <p>
+            <label for="current_password">Aktuelles Passwort:</label>
+            <input type="password" id="current_password" name="current_password" class="form-control" required>
+          </p>
+          <p>
+            <label for="new_password">Neues Passwort:</label>
+            <input type="password" id="new_password" name="new_password" class="form-control" required>
+          </p>
+          <p>
+            <label for="confirm_password">Passwort bestätigen:</label>
+            <input type="password" id="confirm_password" name="confirm_password" class="form-control" required>
+          </p>
+          <button type="submit" name="update_password" class="btn btn-secondary">Passwort ändern</button>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
 
 <?php require_once 'footer.php'; ?>
