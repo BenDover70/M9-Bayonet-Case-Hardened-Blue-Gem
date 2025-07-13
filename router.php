@@ -19,7 +19,8 @@ $allowedPages = [
     'login',
     'register',
     'verify',
-    'logout'
+    'logout',
+    'start'
     
 ]; 
 
@@ -27,7 +28,11 @@ $allowedPages = [
 $protectedPages = [
     'home',
     'profile',
-    'blackjack'
+    'blackjack',
+    'plinko',
+    'slot',
+    'shop',
+    'settings'
 ]; 
 
 // Alle Seiten, die für Administratoren deiner Seite verfügbar sein sollen, aber nicht für andere angemeldete Benutzer, werden hier in das Array eingeragen.
@@ -35,7 +40,7 @@ $adminPages = [
     'admin' // Diese Seite gibt es noch nicht. Du musst sie erst erstellen, wenn du sie verwenden möchtest.
 ];
 
-$page = $_GET['page'] ?? 'login'; // Standardseite
+$page = $_GET['page'] ?? 'start'; // Standardseite
 
 // Ist die Seite geschützt und der Nutzer nicht eingeloggt?
 if (in_array($page, $protectedPages) && !isset($_SESSION['user_id'])) {
